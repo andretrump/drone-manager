@@ -1,0 +1,25 @@
+{
+    "name": "maintainflighttypes",
+    "version": "0.0.1",
+    "description": "Maintain Flight Types",
+    "keywords": [
+        "ui5",
+        "openui5"
+    ],
+    "main": "webapp/index.html",
+    "scripts": {
+        "deploy-config": "npx -p @sap/ux-ui5-tooling fiori add deploy-config cf"
+    },
+    "dependencies": {
+        "@sap/open.fe": "1.120.0"
+    },
+    "devDependencies": {
+        "@sap/ux-ui5-tooling": "^1.12.1"
+    },
+    "ui5": {
+        "dependencies": [
+            "@sap/ux-ui5-tooling",
+            "@sap/open.fe"
+        ]
+    }
+}

@@ -1,0 +1,25 @@
+specVersion: "2.5"
+metadata:
+  name: com.at.dronemanager.maintainflighttypes
+type: application
+framework:  
+  name: OpenUI5  
+  version: "1.120.0"  
+  libraries:   
+  - name: sap.m  
+  - name: sap.ui.core  
+  - name: sap.uxap
+  - name: sap.ui.mdc
+  - name: sap.ui.fl
+  - name: sap.ui.suite
+  - name: sap.ui.table
+  - name: sap.ui.commons
+  - name: themelib_sap_horizon
+server:
+  customMiddleware:
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        backend:
+        - path: /odata
+          url: http://localhost:4004

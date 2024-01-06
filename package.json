@@ -12,17 +12,23 @@
     "express": "^4"
   },
   "devDependencies": {
-    "@cap-js/sqlite": "^1"
+    "@cap-js/sqlite": "^1",
+    "@sap/ux-specification": "^1.120.1",
+    "cds-plugin-ui5": "^0.7.4"
   },
   "scripts": {
     "start": "cds-serve",
     "build:db": "cds deploy --profile development",
     "watch": "cds watch --profile development",
-    "db:local": "docker-compose -f docker-compose-local.yaml up -d"
+    "db:local": "docker-compose -f docker-compose-local.yaml up -d",
+    "watch-maintainflighttypes": "cds watch --open maintainflighttypes/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "features": {
       "assert_integrity": "db"
     }
-  }
+  },
+  "sapux": [
+    "app/com.at.dronemanager.maintainflighttypes"
+  ]
 }

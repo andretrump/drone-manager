@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="CustomizingService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="FlightTypes" EntityType="CustomizingService.FlightTypes">
+                    <NavigationPropertyBinding Path="texts" Target="FlightTypes_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="FlightTypes_texts"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="FlightTypes"/>
+                </EntitySet>
+                <EntitySet Name="WeatherConditions" EntityType="CustomizingService.WeatherConditions">
+                    <NavigationPropertyBinding Path="weatherMappings" Target="WeatherMappings"/>
+                    <NavigationPropertyBinding Path="texts" Target="WeatherConditions_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="WeatherConditions_texts"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="WeatherConditions"/>
+                </EntitySet>
+                <EntitySet Name="EquimentStatus" EntityType="CustomizingService.EquimentStatus">
+                    <NavigationPropertyBinding Path="texts" Target="EquimentStatus_texts"/>
+                    <NavigationPropertyBinding Path="localized" Target="EquimentStatus_texts"/>
+                    <NavigationPropertyBinding Path="SiblingEntity" Target="EquimentStatus"/>
+                </EntitySet>
+                <EntitySet Name="WeatherMappings" EntityType="CustomizingService.WeatherMappings">
+                    <NavigationPropertyBinding Path="weatherCondition" Target="WeatherConditions"/>
+                </EntitySet>
+                <EntitySet Name="FlightTypes_texts" EntityType="CustomizingService.FlightTypes_texts"/>
+                <EntitySet Name="WeatherConditions_texts" EntityType="CustomizingService.WeatherConditions_texts"/>
+                <EntitySet Name="EquimentStatus_texts" EntityType="CustomizingService.EquimentStatus_texts"/>
+            </EntityContainer>
+            <EntityType Name="FlightTypes">
+                <Key>
+                    <PropertyRef Name="code"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" Nullable="false"/>
+                <NavigationProperty Name="texts" Type="Collection(CustomizingService.FlightTypes_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="CustomizingService.FlightTypes_texts">
+                    <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="CustomizingService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="CustomizingService.FlightTypes"/>
+            </EntityType>
+            <EntityType Name="WeatherConditions">
+                <Key>
+                    <PropertyRef Name="code"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" Nullable="false"/>
+                <NavigationProperty Name="weatherMappings" Type="Collection(CustomizingService.WeatherMappings)" Partner="weatherCondition"/>
+                <NavigationProperty Name="texts" Type="Collection(CustomizingService.WeatherConditions_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="CustomizingService.WeatherConditions_texts">
+                    <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="CustomizingService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="CustomizingService.WeatherConditions"/>
+            </EntityType>
+            <EntityType Name="EquimentStatus">
+                <Key>
+                    <PropertyRef Name="code"/>
+                    <PropertyRef Name="IsActiveEntity"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" Nullable="false"/>
+                <NavigationProperty Name="texts" Type="Collection(CustomizingService.EquimentStatus_texts)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <NavigationProperty Name="localized" Type="CustomizingService.EquimentStatus_texts">
+                    <ReferentialConstraint Property="code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
+                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
+                <NavigationProperty Name="DraftAdministrativeData" Type="CustomizingService.DraftAdministrativeData" ContainsTarget="true"/>
+                <NavigationProperty Name="SiblingEntity" Type="CustomizingService.EquimentStatus"/>
+            </EntityType>
+            <EntityType Name="WeatherMappings">
+                <Key>
+                    <PropertyRef Name="flight_serialNumber"/>
+                    <PropertyRef Name="weatherCondition_code"/>
+                </Key>
+                <Property Name="flight_serialNumber" Type="Edm.Int32" Nullable="false"/>
+                <NavigationProperty Name="weatherCondition" Type="CustomizingService.WeatherConditions" Partner="weatherMappings">
+                    <ReferentialConstraint Property="weatherCondition_code" ReferencedProperty="code"/>
+                </NavigationProperty>
+                <Property Name="weatherCondition_code" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="DraftAdministrativeData">
+                <Key>
+                    <PropertyRef Name="DraftUUID"/>
+                </Key>
+                <Property Name="DraftUUID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="CreationDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsCreatedByMe" Type="Edm.Boolean"/>
+                <Property Name="LastChangeDateTime" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="LastChangedByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="InProcessByUser" Type="Edm.String" MaxLength="256"/>
+                <Property Name="DraftIsProcessedByMe" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="FlightTypes_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="WeatherConditions_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="EquimentStatus_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="CustomizingService.FlightTypes"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="CustomizingService.FlightTypes"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="CustomizingService.WeatherConditions"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="CustomizingService.WeatherConditions"/>
+            </Action>
+            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="CustomizingService.EquimentStatus"/>
+                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
+                <ReturnType Type="CustomizingService.EquimentStatus"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="CustomizingService.FlightTypes"/>
+                <ReturnType Type="CustomizingService.FlightTypes"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="CustomizingService.WeatherConditions"/>
+                <ReturnType Type="CustomizingService.WeatherConditions"/>
+            </Action>
+            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="CustomizingService.EquimentStatus"/>
+                <ReturnType Type="CustomizingService.EquimentStatus"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="CustomizingService.FlightTypes"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="CustomizingService.FlightTypes"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="CustomizingService.WeatherConditions"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="CustomizingService.WeatherConditions"/>
+            </Action>
+            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+                <Parameter Name="in" Type="CustomizingService.EquimentStatus"/>
+                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+                <ReturnType Type="CustomizingService.EquimentStatus"/>
+            </Action>
+            <Annotations Target="CustomizingService.FlightTypes">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CustomizingService.EntityContainer/FlightTypes">
+                <Annotation Term="Common.DraftRoot">
+                    <Record Type="Common.DraftRootType">
+                        <PropertyValue Property="ActivationAction" String="CustomizingService.draftActivate"/>
+                        <PropertyValue Property="EditAction" String="CustomizingService.draftEdit"/>
+                        <PropertyValue Property="PreparationAction" String="CustomizingService.draftPrepare"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CustomizingService.FlightTypes/name">
+                <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                </Annotations>
+                <Annotations Target="CustomizingService.FlightTypes/descr">
+                    <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                    </Annotations>
+                    <Annotations Target="CustomizingService.FlightTypes/IsActiveEntity">
+                        <Annotation Term="UI.Hidden" Bool="true"/>
+                    </Annotations>
+                    <Annotations Target="CustomizingService.FlightTypes/HasActiveEntity">
+                        <Annotation Term="UI.Hidden" Bool="true"/>
+                    </Annotations>
+                    <Annotations Target="CustomizingService.FlightTypes/HasDraftEntity">
+                        <Annotation Term="UI.Hidden" Bool="true"/>
+                    </Annotations>
+                    <Annotations Target="CustomizingService.FlightTypes/DraftAdministrativeData">
+                        <Annotation Term="UI.Hidden" Bool="true"/>
+                    </Annotations>
+                    <Annotations Target="CustomizingService.WeatherConditions">
+                        <Annotation Term="UI.Identification">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="name"/>
+                                </Record>
+                            </Collection>
+                        </Annotation>
+                    </Annotations>
+                    <Annotations Target="CustomizingService.EntityContainer/WeatherConditions">
+                        <Annotation Term="Common.DraftRoot">
+                            <Record Type="Common.DraftRootType">
+                                <PropertyValue Property="ActivationAction" String="CustomizingService.draftActivate"/>
+                                <PropertyValue Property="EditAction" String="CustomizingService.draftEdit"/>
+                                <PropertyValue Property="PreparationAction" String="CustomizingService.draftPrepare"/>
+                            </Record>
+                        </Annotation>
+                    </Annotations>
+                    <Annotations Target="CustomizingService.WeatherConditions/name">
+                        <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                        </Annotations>
+                        <Annotations Target="CustomizingService.WeatherConditions/descr">
+                            <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                            </Annotations>
+                            <Annotations Target="CustomizingService.WeatherConditions/IsActiveEntity">
+                                <Annotation Term="UI.Hidden" Bool="true"/>
+                            </Annotations>
+                            <Annotations Target="CustomizingService.WeatherConditions/HasActiveEntity">
+                                <Annotation Term="UI.Hidden" Bool="true"/>
+                            </Annotations>
+                            <Annotations Target="CustomizingService.WeatherConditions/HasDraftEntity">
+                                <Annotation Term="UI.Hidden" Bool="true"/>
+                            </Annotations>
+                            <Annotations Target="CustomizingService.WeatherConditions/DraftAdministrativeData">
+                                <Annotation Term="UI.Hidden" Bool="true"/>
+                            </Annotations>
+                            <Annotations Target="CustomizingService.EquimentStatus">
+                                <Annotation Term="UI.Identification">
+                                    <Collection>
+                                        <Record Type="UI.DataField">
+                                            <PropertyValue Property="Value" Path="name"/>
+                                        </Record>
+                                    </Collection>
+                                </Annotation>
+                            </Annotations>
+                            <Annotations Target="CustomizingService.EntityContainer/EquimentStatus">
+                                <Annotation Term="Common.DraftRoot">
+                                    <Record Type="Common.DraftRootType">
+                                        <PropertyValue Property="ActivationAction" String="CustomizingService.draftActivate"/>
+                                        <PropertyValue Property="EditAction" String="CustomizingService.draftEdit"/>
+                                        <PropertyValue Property="PreparationAction" String="CustomizingService.draftPrepare"/>
+                                    </Record>
+                                </Annotation>
+                            </Annotations>
+                            <Annotations Target="CustomizingService.EquimentStatus/name">
+                                <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                </Annotations>
+                                <Annotations Target="CustomizingService.EquimentStatus/descr">
+                                    <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                    </Annotations>
+                                    <Annotations Target="CustomizingService.EquimentStatus/IsActiveEntity">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="CustomizingService.EquimentStatus/HasActiveEntity">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="CustomizingService.EquimentStatus/HasDraftEntity">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="CustomizingService.EquimentStatus/DraftAdministrativeData">
+                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                    </Annotations>
+                                    <Annotations Target="CustomizingService.WeatherMappings/weatherCondition_code">
+                                        <Annotation Term="Common.ValueList">
+                                            <Record Type="Common.ValueListType">
+                                                <PropertyValue Property="Label" String="WeatherConditions"/>
+                                                <PropertyValue Property="CollectionPath" String="WeatherConditions"/>
+                                                <PropertyValue Property="Parameters">
+                                                    <Collection>
+                                                        <Record Type="Common.ValueListParameterInOut">
+                                                            <PropertyValue Property="LocalDataProperty" PropertyPath="weatherCondition_code"/>
+                                                            <PropertyValue Property="ValueListProperty" String="code"/>
+                                                        </Record>
+                                                        <Record Type="Common.ValueListParameterDisplayOnly">
+                                                            <PropertyValue Property="ValueListProperty" String="name"/>
+                                                        </Record>
+                                                    </Collection>
+                                                </PropertyValue>
+                                            </Record>
+                                        </Annotation>
+                                    </Annotations>
+                                    <Annotations Target="CustomizingService.DraftAdministrativeData">
+                                        <Annotation Term="Common.Label" String="{i18n>Draft_DraftAdministrativeData}"/>
+                                        </Annotations>
+                                        <Annotations Target="CustomizingService.DraftAdministrativeData/DraftUUID">
+                                            <Annotation Term="UI.Hidden" Bool="true"/>
+                                            <Annotation Term="Common.Label" String="{i18n>Draft_DraftUUID}"/>
+                                            </Annotations>
+                                            <Annotations Target="CustomizingService.DraftAdministrativeData/CreationDateTime">
+                                                <Annotation Term="Common.Label" String="{i18n>Draft_CreationDateTime}"/>
+                                                </Annotations>
+                                                <Annotations Target="CustomizingService.DraftAdministrativeData/CreatedByUser">
+                                                    <Annotation Term="Common.Label" String="{i18n>Draft_CreatedByUser}"/>
+                                                    </Annotations>
+                                                    <Annotations Target="CustomizingService.DraftAdministrativeData/DraftIsCreatedByMe">
+                                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                                        <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsCreatedByMe}"/>
+                                                        </Annotations>
+                                                        <Annotations Target="CustomizingService.DraftAdministrativeData/LastChangeDateTime">
+                                                            <Annotation Term="Common.Label" String="{i18n>Draft_LastChangeDateTime}"/>
+                                                            </Annotations>
+                                                            <Annotations Target="CustomizingService.DraftAdministrativeData/LastChangedByUser">
+                                                                <Annotation Term="Common.Label" String="{i18n>Draft_LastChangedByUser}"/>
+                                                                </Annotations>
+                                                                <Annotations Target="CustomizingService.DraftAdministrativeData/InProcessByUser">
+                                                                    <Annotation Term="Common.Label" String="{i18n>Draft_InProcessByUser}"/>
+                                                                    </Annotations>
+                                                                    <Annotations Target="CustomizingService.DraftAdministrativeData/DraftIsProcessedByMe">
+                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                        <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsProcessedByMe}"/>
+                                                                        </Annotations>
+                                                                        <Annotations Target="CustomizingService.FlightTypes_texts/locale">
+                                                                            <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                                            </Annotations>
+                                                                            <Annotations Target="CustomizingService.FlightTypes_texts/name">
+                                                                                <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                </Annotations>
+                                                                                <Annotations Target="CustomizingService.FlightTypes_texts/descr">
+                                                                                    <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="CustomizingService.WeatherConditions_texts/locale">
+                                                                                        <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                                                        </Annotations>
+                                                                                        <Annotations Target="CustomizingService.WeatherConditions_texts/name">
+                                                                                            <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                            </Annotations>
+                                                                                            <Annotations Target="CustomizingService.WeatherConditions_texts/descr">
+                                                                                                <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                </Annotations>
+                                                                                                <Annotations Target="CustomizingService.EquimentStatus_texts/locale">
+                                                                                                    <Annotation Term="Common.Label" String="{i18n>LanguageCode}"/>
+                                                                                                    </Annotations>
+                                                                                                    <Annotations Target="CustomizingService.EquimentStatus_texts/name">
+                                                                                                        <Annotation Term="Common.Label" String="{i18n>Name}"/>
+                                                                                                        </Annotations>
+                                                                                                        <Annotations Target="CustomizingService.EquimentStatus_texts/descr">
+                                                                                                            <Annotation Term="Common.Label" String="{i18n>Description}"/>
+                                                                                                            </Annotations>
+                                                                                                        </Schema>
+                                                                                                    </edmx:DataServices>
+                                                                                                </edmx:Edmx>
