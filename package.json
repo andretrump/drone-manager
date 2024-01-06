@@ -1,11 +1,13 @@
 {
-  "name": "drone-log",
+  "name": "drone-manager",
   "version": "1.0.0",
   "description": "A simple CAP project.",
   "repository": "<Add your repository here>",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@cap-js/change-tracking": "^1.0.3",
+    "@cap-js/postgres": "^1",
     "@sap/cds": "^7",
     "express": "^4"
   },
@@ -13,6 +15,14 @@
     "@cap-js/sqlite": "^1"
   },
   "scripts": {
-    "start": "cds-serve"
+    "start": "cds-serve",
+    "build:db": "cds deploy --profile development",
+    "watch": "cds watch --profile development",
+    "db:local": "docker-compose -f docker-compose-local.yaml up -d"
+  },
+  "cds": {
+    "features": {
+      "assert_integrity": "db"
+    }
   }
 }
