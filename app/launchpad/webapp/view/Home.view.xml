@@ -1,0 +1,50 @@
+<mvc:View controllerName="launchpad.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Panel id="SettingsPanel"
+        class="sapUiResponsiveMargin"
+        width="auto"
+        headerText="{i18n>settings}"
+        expanded="true"
+        expandable="true">
+        <GenericTile id="EquipmentStatusTile"
+            class="sapUiTinyMargin tileLayout"
+            header="{i18n>maintainEquipmentStatus}"
+            press=".navToApp('RouteEquipmentStatus')">
+            <TileContent id="EquipmentStatusTileContent">
+                <ImageContent id="EquipmentStatusTileIcon"
+                    src="sap-icon://high-priority" />
+            </TileContent>
+        </GenericTile>
+
+        <GenericTile id="FlightTypesTile"
+            class="sapUiTinyMargin tileLayout"
+            header="{i18n>maintainFlightTypes}"
+            press=".navToApp('RouteFlightTypes')">
+            <TileContent id="FlightTypesTileContent">
+                <ImageContent id="FlightTypesTileIcon"
+                    src="sap-icon://thing-type" />
+            </TileContent>
+        </GenericTile>
+
+        <GenericTile id="QualificationsTile"
+            class="sapUiTinyMargin tileLayout"
+            header="{i18n>maintainQualifications}"
+            press=".navToApp('RouteQualifications')">
+            <TileContent id="QualificationsTileContent">
+                <ImageContent id="QualificationsTileIcon"
+                    src="sap-icon://study-leave" />
+            </TileContent>
+        </GenericTile>
+
+        <GenericTile id="WeatherConditionsTile"
+            class="sapUiTinyMargin tileLayout"
+            header="{i18n>maintainWeatherConditions}"
+            press=".navToApp('RouteWeatherConditions')">
+            <TileContent id="WeatherConditionsTileContent">
+                <ImageContent id="WeatherConditionsTileIcon"
+                    src="sap-icon://weather-proofing" />
+            </TileContent>
+        </GenericTile>
+    </Panel>
+</mvc:View>

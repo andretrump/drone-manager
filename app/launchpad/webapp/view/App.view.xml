@@ -1,0 +1,47 @@
+<mvc:View controllerName="launchpad.controller.App"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core">
+    <App id="app">
+        <Page id="page">
+            <customHeader>
+                <f:ShellBar id="ShellBar"
+                    title="{i18n>appTitle}"
+                    showNavButton="true"
+                    homeIcon="./assets/logo.svg"
+                    homeIconPressed=".navToApp('RouteHome')"
+                    navButtonPressed=".onBackButtonPressed()">
+                    <f:menu>
+                        <Menu id="AppsMenu">
+                            <MenuItem id="SettingsItem"
+                                text="{i18n>settings}"
+                                icon="sap-icon://settings">
+                                <MenuItem id="EquipmentStatusItem"
+                                    text="{i18n>maintainEquipmentStatus}"
+                                    icon="sap-icon://discussion-2"
+                                    press=".navToApp('RouteEquipmentStatus')"/>
+                                <MenuItem id="FlightTypesItem"
+                                    text="{i18n>maintainFlightTypes}"
+                                    icon="sap-icon://clear-filter"
+                                    press=".navToApp('RouteFlightTypes')"/>
+                                <MenuItem id="QualificationsItem"
+                                    text="{i18n>maintainQualifications}"
+                                    icon="sap-icon://study-leave"
+                                    press=".navToApp('RouteQualifications')"/>
+                                <MenuItem id="WeatherConditionsItem"
+                                    text="{i18n>maintainWeatherConditions}"
+                                    icon="sap-icon://weather-proofing"
+                                    press=".navToApp('RouteWeatherConditions')"/>
+                            </MenuItem>
+                        </Menu>
+                    </f:menu>
+                </f:ShellBar>
+            </customHeader>
+            <content>
+            </content>
+        </Page>
+    </App>
+</mvc:View>

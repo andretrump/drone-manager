@@ -1,0 +1,186 @@
+{
+    "_version": "1.58.0",
+    "sap.app": {
+        "id": "launchpad",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.11.3",
+            "toolsId": "36191a91-3cce-46ce-84a4-78f2b574c5b6"
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "./assets/favicon.ico",
+            "favIcon": "./assets/favicon.ico",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.120.4",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "launchpad.i18n.i18n"
+                }
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "launchpad.view",
+                "controlAggregation": "content",
+                "controlId": "page",
+                "clearControlAggregation": true,
+                "transition": "slide"
+            },
+            "routes": [
+                {
+                    "name": "RouteHome",
+                    "pattern": "",
+                    "target": [
+                        "TargetHome"
+                    ]
+                },
+                {
+                    "name": "RouteEquipmentStatus",
+                    "pattern": "EquipmentStatus",
+                    "target": [
+                        "TargetEquipmentStatus"
+                    ]
+                },
+                {
+                    "name": "RouteFlightTypes",
+                    "pattern": "FlightTypes",
+                    "target": [
+                        "TargetFlightTypes"
+                    ]
+                },
+                {
+                    "name": "RouteQualifications",
+                    "pattern": "Qualifications",
+                    "target": [
+                        "TargetQualifications"
+                    ]
+                },
+                {
+                    "name": "RouteWeatherConditions",
+                    "pattern": "WeatherConditions",
+                    "target": [
+                        "TargetWeatherConditions"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetHome": {
+                    "viewType": "XML",
+                    "viewId": "Home",
+                    "viewName": "Home"
+                },
+                "TargetEquipmentStatus": {
+                    "id": "EquipmentStatus",
+                    "type": "Component",
+                    "usage": "equipmentStatusComponent"
+                },
+                "TargetFlightTypes": {
+                    "id": "FlightTypes",
+                    "type": "Component",
+                    "usage": "flightTypesComponent"
+                },
+                "TargetQualifications": {
+                    "id": "Qualifications",
+                    "type": "Component",
+                    "usage": "qualificationsComponent"
+                },
+                "TargetWeatherConditions": {
+                    "id": "WeatherConditions",
+                    "type": "Component",
+                    "usage": "weatherConditionsComponent"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "launchpad.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        },
+        "componentUsages": {
+            "equipmentStatusComponent": {
+                "name": "maintainequipmentstatus",
+                "settings": {},
+                "componentData": {
+                    "parentComponentName": "launchpad"
+                },
+                "lazy": false
+            },
+            "flightTypesComponent": {
+                "name": "maintainflighttypes",
+                "settings": {},
+                "componentData": {
+                    "parentComponentName": "launchpad"
+                },
+                "lazy": false
+            },
+            "qualificationsComponent": {
+                "name": "maintainqualifications",
+                "settings": {},
+                "componentData": {
+                    "parentComponentName": "launchpad"
+                },
+                "lazy": false
+            },
+            "weatherConditionsComponent": {
+                "name": "maintainweatherconditions",
+                "settings": {},
+                "componentData": {
+                    "parentComponentName": "launchpad"
+                },
+                "lazy": false
+            }
+        }
+    }
+}
