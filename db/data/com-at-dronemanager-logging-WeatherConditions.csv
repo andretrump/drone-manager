@@ -1,5 +1,5 @@
-code;name;header_ID
-T;Trocken;0
-R;Regnerisch;0
-W;Bewölkt;0
-S;Stürmisch;0
+ID;code;name;header_ID
+dec078d0-b709-470b-be4d-f73bacbf6945;T;Trocken;0
+f596cb8d-40a4-4d75-bcc1-74d5706a0082;R;Regnerisch;0
+a51b53c1-124b-42ad-813a-af2e03502f2e;W;Bewölkt;0
+7e1f577f-3896-4f74-9d65-23a828a028cc;S;Stürmisch;0

@@ -1,9 +1,13 @@
-using {
-    cuid,
-    sap.common.CodeList
-} from '@sap/cds/common';
+using {cuid} from '@sap/cds/common';
 
 namespace com.at.dronemanager;
+
+@assert.unique: {name: [name]}
+aspect SimpleCodeList {
+    key ID : UUID;
+    code   : String;
+    name   : String;
+}
 
 context logging {
     entity Flights {
@@ -32,7 +36,7 @@ context logging {
 
     @Capabilities: {
         Insertable: false,
-        Deletable: false
+        Deletable : false
     }
     entity FlightTypesHeader {
         key ID          : Integer;
@@ -40,11 +44,10 @@ context logging {
                               on flightTypes.header = $self;
     }
 
-    entity FlightTypes : CodeList {
-        key code      : String;
-            header    : Association to one FlightTypesHeader
-                            on header.ID = header_ID;
-            header_ID : Integer @readonly @cds.on.insert: 0;
+    entity FlightTypes : SimpleCodeList {
+        header    : Association to one FlightTypesHeader
+                        on header.ID = header_ID;
+        header_ID : Integer  @readonly  @cds.on.insert: 0;
 
     }
 
@@ -55,7 +58,7 @@ context logging {
 
     @Capabilities: {
         Insertable: false,
-        Deletable: false
+        Deletable : false
     }
     entity WeatherConditionsHeader {
         key ID                : Integer;
@@ -63,13 +66,12 @@ context logging {
                                     on weatherConditions.header = $self;
     }
 
-    entity WeatherConditions : CodeList {
-        key code            : String;
-            weatherMappings : Association to many WeatherMappings
-                                  on weatherMappings.weatherCondition = $self;
-            header          : Association to one WeatherConditionsHeader
-                                  on header.ID = header_ID;
-            header_ID       : Integer @readonly @cds.on.insert: 0;
+    entity WeatherConditions : SimpleCodeList {
+        weatherMappings : Association to many WeatherMappings
+                              on weatherMappings.weatherCondition = $self;
+        header          : Association to one WeatherConditionsHeader
+                              on header.ID = header_ID;
+        header_ID       : Integer  @readonly  @cds.on.insert: 0;
     }
 
     entity Drone2FlightAssignments {
@@ -97,7 +99,7 @@ context hr {
 
     @Capabilities: {
         Insertable: false,
-        Deletable: false
+        Deletable : false
     }
     entity QualificationsHeader {
         key ID             : Integer;
@@ -105,13 +107,12 @@ context hr {
                                  on qualifications.header = $self;
     }
 
-    entity Qualifications : CodeList {
-        key code                    : String;
-            qualifiactionAssigments : Composition of many QualificationAssignments
-                                          on qualifiactionAssigments.qualification = $self;
-            header                  : Association to one QualificationsHeader
-                                          on header.ID = header_ID;
-            header_ID               : Integer @readonly @cds.on.insert: 0;
+    entity Qualifications : SimpleCodeList {
+        qualifiactionAssigments : Composition of many QualificationAssignments
+                                      on qualifiactionAssigments.qualification = $self;
+        header                  : Association to one QualificationsHeader
+                                      on header.ID = header_ID;
+        header_ID               : Integer  @readonly  @cds.on.insert: 0;
     }
 }
 
@@ -131,7 +132,7 @@ context equipment {
 
     @Capabilities: {
         Insertable: false,
-        Deletable: false
+        Deletable : false
     }
     entity EquipmentStatusHeader {
         key ID             : Integer;
@@ -139,11 +140,10 @@ context equipment {
                                  on equipmentStaus.header = $self;
     }
 
-    entity EquipmentStatus : CodeList {
-        key code      : String;
-            header    : Association to one EquipmentStatusHeader
-                            on header.ID = header_ID;
-            header_ID : Integer @readonly @cds.on.insert: 0;
+    entity EquipmentStatus : SimpleCodeList {
+        header    : Association to one EquipmentStatusHeader
+                        on header.ID = header_ID;
+        header_ID : Integer  @readonly  @cds.on.insert: 0;
     }
 
     entity Materials : cuid {
