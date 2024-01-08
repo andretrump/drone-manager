@@ -21,12 +21,12 @@ annotate service.WeatherConditions with @(UI.LineItem #AvailableWeatherCondition
     {
         $Type: 'UI.DataField',
         Value: code,
-        Label: '{@i18n>name}',
+        Label: '{@i18n>code}',
     },
     {
         $Type: 'UI.DataField',
         Value: name,
-        Label: '{@i18n>code}'
+        Label: '{@i18n>name}'
     },
 ]) {
     @UI.Hidden

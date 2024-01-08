@@ -19,7 +19,8 @@
     "start": "cds-serve",
     "build:db": "cds deploy --profile development",
     "watch": "cds watch --profile development",
-    "db:local": "docker-compose -f docker-compose-local.yaml up -d"
+    "db:local": "docker-compose -f docker-compose-local.yaml up -d",
+    "watch-maintainqualifications": "cds watch --open maintainqualifications/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
   "cds": {
     "features": {
@@ -32,6 +33,7 @@
   "sapux": [
     "app/maintainequipmentstatus",
     "app/maintainflighttypes",
-    "app/maintainweatherconditions"
+    "app/maintainweatherconditions",
+    "app/maintainqualifications"
   ]
 }

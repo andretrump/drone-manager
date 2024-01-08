@@ -1,9 +1,9 @@
 using SettingsService as service from '../../srv/settings-service';
 
-annotate service.FlightTypesHeader with @(
+annotate service.QualificationsHeader with @(
     UI.HeaderInfo: {
-        TypeName      : 'Flight Type',
-        TypeNamePlural: 'Flight Types',
+        TypeName      : 'Qualification',
+        TypeNamePlural: 'Qualifications',
         Title         : {
             $Type: 'UI.DataField',
             Value: '{@i18n>appTitle}',
@@ -12,12 +12,12 @@ annotate service.FlightTypesHeader with @(
     UI.Facets    : [{
         $Type : 'UI.ReferenceFacet',
         Label : '{@i18n>sectionTitle}',
-        ID    : 'AvailableFlightTypes',
-        Target: 'flightTypes/@UI.LineItem#AvailableFlightTypes',
+        ID    : 'AvailableQualifications',
+        Target: 'qualifications/@UI.LineItem#AvailableQualifications',
     }, ]
 );
 
-annotate service.FlightTypes with @(UI.LineItem #AvailableFlightTypes: [
+annotate service.Qualifications with @(UI.LineItem #AvailableQualifications: [
     {
         $Type: 'UI.DataField',
         Value: code,

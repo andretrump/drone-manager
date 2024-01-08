@@ -22,12 +22,12 @@ annotate service.EquipmentStatus with @(UI.LineItem #AvailableEquipmentStatus: [
     {
         $Type: 'UI.DataField',
         Value: code,
-        Label: '{@i18n>name}',
+        Label: '{@i18n>code}',
     },
     {
         $Type: 'UI.DataField',
         Value: name,
-        Label: '{@i18n>code}'
+        Label: '{@i18n>name}'
     },
 ]) {
     @UI.Hidden
