@@ -30,6 +30,7 @@
     "app/*"
   ],
   "sapux": [
-    "app/maintainequipmentstatus"
+    "app/maintainequipmentstatus",
+    "app/maintainflighttypes"
   ]
 }
