@@ -31,6 +31,7 @@
   ],
   "sapux": [
     "app/maintainequipmentstatus",
-    "app/maintainflighttypes"
+    "app/maintainflighttypes",
+    "app/maintainweatherconditions"
   ]
 }

@@ -1,7 +1,7 @@
 import BaseComponent from "sap/fe/core/AppComponent";
 
 /**
- * @namespace maintainflighttypes
+ * @namespace maintainweatherconditions
  */
 export default class Component extends BaseComponent {
 
@@ -17,7 +17,7 @@ export default class Component extends BaseComponent {
 	public init() : void {
         super.init();
         this.getRouter().navTo(
-            "FlightTypesHeaderObjectPage",
+            "WeatherConditionsHeaderObjectPage",
             {
                 key: "ID=0,IsActiveEntity=true"
             }

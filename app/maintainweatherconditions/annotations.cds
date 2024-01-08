@@ -1,9 +1,9 @@
 using SettingsService as service from '../../srv/settings-service';
 
-annotate service.FlightTypesHeader with @(
+annotate service.WeatherConditionsHeader with @(
     UI.HeaderInfo: {
-        TypeName      : 'Flight Type',
-        TypeNamePlural: 'Flight Types',
+        TypeName      : 'WeatherCondition',
+        TypeNamePlural: 'WeatherConditions',
         Title         : {
             $Type: 'UI.DataField',
             Value: '{@i18n>appTitle}',
@@ -12,12 +12,12 @@ annotate service.FlightTypesHeader with @(
     UI.Facets    : [{
         $Type : 'UI.ReferenceFacet',
         Label : '{@i18n>sectionTitle}',
-        ID    : 'AvailableFlightTypes',
-        Target: 'flightTypes/@UI.LineItem#AvailableFlightTypes',
+        ID    : 'AvailableWeatherConditions',
+        Target: 'weatherConditions/@UI.LineItem#AvailableWeatherConditions',
     }, ]
 );
 
-annotate service.FlightTypes with @(UI.LineItem #AvailableFlightTypes: [
+annotate service.WeatherConditions with @(UI.LineItem #AvailableWeatherConditions: [
     {
         $Type: 'UI.DataField',
         Value: code,
